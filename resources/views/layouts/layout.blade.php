@@ -37,7 +37,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="{{  route("orphan.my") }}">All</a>
                         <a class="dropdown-item" href="{{  route("adoptions.my") }}">Adoptions</a>
-
+			<a class="dropdown-item" href="{{ route("orphan.create")  }}">Created Orphan</a
                     </div>
                 </div>
             </li>
