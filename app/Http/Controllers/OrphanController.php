@@ -159,7 +159,10 @@ class OrphanController extends Controller
         {
             return $this->redirection(false,false,"","","/",true,$validation->errors());
         }
-        $orphan = Orphan::where("user_id",auth()->user()->id)->paginate();
+        $orphan = $orphan = Orphan::where("user_id",1)->paginate();
+        if (auth()->check()) {
+            $orphan = Orphan::where("user_id",auth()->user()->id)->paginate();
+        }
         if (!empty($profileId))
         {
             $orphan = Orphan::where("user_id",$profileId)->paginate();
