@@ -36,4 +36,5 @@ Route::prefix("adoptions")->group(function()
     Route::delete("cancel/{adoptId}",ControllerHelpers::Action("Adoption","cancel"))->name("adoption.cancel");
     Route::get("my-adoptions",ControllerHelpers::Action("Adoption","myAdoptions"))->name("adoptions.my");
 });
-
+Route::view("profile","profile")->name("profile")->middleware("auth");
+Route::post('profile/submit', ControllerHelpers::Action("Auth\Account","submit"))->name("profile.update");
