@@ -1,4 +1,4 @@
-@extends("layouts.layouts")
+@extends("layouts.layout")
 @section("content")
    <div class ="col-md-12">
    <form action="post" action="{{ route("profile.update") }}">

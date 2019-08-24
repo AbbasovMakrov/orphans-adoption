@@ -13,6 +13,7 @@ use App\Http\Requests\UpdateOrphanRequest as UpdateRequest;
 class OrphanController extends Controller
 {
     private const STATUS = "success";
+    private const FAIL = "fail";
     public function __construct()
     {
         $this->middleware("auth")->except(['show',"index"]);
