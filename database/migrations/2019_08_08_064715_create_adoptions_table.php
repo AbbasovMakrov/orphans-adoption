@@ -15,8 +15,8 @@ class CreateAdoptionsTable extends Migration
     {
         Schema::create('adoptions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger("orphan_id")->index("orphan_id");
-            $table->unsignedBigInteger("user_id")->index("user_id")->nullable();
+            $table->unsignedBigInteger("orphan_id")->index();
+            $table->unsignedBigInteger("user_id")->index()->nullable();
             $table->timestamps();
             //$table->softDeletes();
             $table->foreign("orphan_id")->references("id")->on("orphans");
