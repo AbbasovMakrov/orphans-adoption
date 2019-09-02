@@ -23,7 +23,10 @@ Route::get("locations/get",function()
     $cache = Cache::get("locations");
     if (empty($cache))
     {
-        Cache::forever("locations",Location::get());
+        if (!Cache::forever("locations",Location::get()))
+        {
+            $cache = Location::get();
+        }
     }
    return response()->json([
       "locations" => $cache
