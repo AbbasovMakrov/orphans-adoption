@@ -14,9 +14,10 @@
                         @if($orphan->other_details != null)
                             <p class="card-text">Other Details : {{$orphan->other_details}}</p>
                         @endif
+                        <p class="card-text">Contact phone: {{$orphan->user->phone}}</p>
                         <p class="card-text">published By : {{$orphan->user->name}}</p>
                         @auth
-                            @if(auth()->user()->id == $orphan->user_id)
+                            @if(Auth::user()->id == $orphan->user_id)
                                 <form action="{{route("orphan.destroy",['id' => $orphan->id])}}" method="post">
                                     @method("delete")
                                     @csrf
@@ -35,8 +36,8 @@
                             @elseauth
                             <h1>
                                 To Adopt Please
-                                <a href="{{url("login")}}" class="btn btn-outline-primary">Login</a>Or
-                                <a href="{{url("login")}}" class="btn btn-outline-success">Register</a>
+                                <a href="{{url("/login")}}" class="btn btn-outline-primary">Login</a>Or
+                                <a href="{{url("/register")}}" class="btn btn-outline-success">Register</a>
 
                             </h1>
                         @endauth

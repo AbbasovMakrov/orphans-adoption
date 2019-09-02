@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrhpanRequest as StoreRequest;
+use App\Location;
 use App\Rules\CheckUserId;
 use Illuminate\Http\Request;
 use App\Orphan;
@@ -16,7 +17,7 @@ class OrphanController extends Controller
     private const FAIL = "fail";
     public function __construct()
     {
-        $this->middleware("auth")->except(['show',"index"]);
+        $this->middleware("auth")->except(['show',"index","search","myOrphans"]);
     }
 
     /**
@@ -36,7 +37,7 @@ class OrphanController extends Controller
      */
     public function create()
     {
-        return view("orphans.create");
+        return view("orphans.create",$data = ['locations' => Location::get()]);
     }
 
     /**
@@ -160,9 +161,9 @@ class OrphanController extends Controller
         {
             return $this->redirection(false,false,"","","/",true,$validation->errors());
         }
-        $orphan = $orphan = Orphan::where("user_id",1)->paginate();
+        $orphan = $orphan = Orphan::where("user_id",$profileId)->paginate();
         if (auth()->check()) {
-            $orphan = Orphan::where("user_id",auth()->user()->id)->paginate();
+            $orphan = Orphan::whereUserId(auth()->user()->id)->paginate();
         }
         if (!empty($profileId))
         {
@@ -170,6 +171,18 @@ class OrphanController extends Controller
         }
         return view("orphans.my-orphans",[
             "orphans" => $orphan
+        ]);
+    }
+
+    public function search($keyword)
+    {
+        $orphans = Orphan::where("name","like","%{$keyword}%")->with("user");
+        if ($orphans->count() <= 0)
+        {
+            $orphans = Orphan::with("user");
+        }
+        return response()->json([
+            "orphans" => $orphans->get()
         ]);
     }
 }

@@ -19,8 +19,12 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-//Vue.component('example-component', require('/components/ExampleComponent.vue').default);
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 //Vue.component('get-orphans', require('./components/get-orphans.vue').default);
+Vue.component('locations', require('./components/locations.vue').default);
+Vue.component('search-users', require('./components/SearchUsers').default);
+Vue.component('search-orphans', require('./components/SearchOrphans').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -5,13 +5,16 @@ namespace App\Observers;
 use App\Adoption;
 use App\Orphan;
 
+
 class AdoptionObserver
 {
-
-
     public function created(Adoption $adoption)
     {
-        Orphan::findOrFail($adoption->orphan_id)->delete();
+        try {
+            Orphan::findOrFail($adoption->orphan_id)->delete();
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     public function deleted(Adoption $adoption)

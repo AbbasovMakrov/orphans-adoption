@@ -23,7 +23,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control w-100" value="{{$orphan->location}}"  name="location" placeholder="Location">
+                                    <locations></locations>
                                 </div>
                             </div>
                             <div class="col-md-12">

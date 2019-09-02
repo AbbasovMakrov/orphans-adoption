@@ -17,6 +17,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -28,18 +29,24 @@
         <ul class="navbar-nav">
             <li class="nav-item active">
                 <a class="nav-link" href="{{url("/")}}">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{route("user.search")}}">Search Users</a>
+                <a class="nav-link" href="{{route("orphan.search")}}">Search Orphans</a>
             </li>
             <li class="nav-item">
+                @auth
                 <div class="dropdown show">
+
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        My Orphans
+                        Orphans&Adoption
                     </button>
+
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="{{  route("orphan.my") }}">All</a>
                         <a class="dropdown-item" href="{{  route("adoptions.my") }}">Adoptions</a>
-			<a class="dropdown-item" href="{{ route("orphan.create")  }}">Created Orphan</a
+			            <a class="dropdown-item" href="{{ route("orphan.create")  }}">Created Orphan</a>
                     </div>
                 </div>
+                    @endauth
             </li>
         </ul>
     </div>
