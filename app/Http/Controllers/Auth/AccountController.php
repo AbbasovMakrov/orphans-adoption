@@ -25,7 +25,9 @@ class AccountController extends Controller
         ]);
         $data = [
             "name" => $request->name,
-            "email" => $request->email
+            "email" => $request->email,
+            "phone" => $request->phone,
+            "age" => $request->age
         ];
         if (!empty($request->password)) {
             $data['password'] = Hash::make($request->password);
