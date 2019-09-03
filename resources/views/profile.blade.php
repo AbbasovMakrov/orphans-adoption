@@ -1,7 +1,7 @@
 @extends("layouts.layout")
 @section("content")
    <div class="col-md-12">
-   <form action="post" action="{{ route ("profile.update") }}">
+   <form method="post" action="{{ route ("profile.update") }}">
     @csrf
    <input class="form-control" type="text" placeholder="Name" value="{{auth()->user()->name}}">
    <input class="form-control" type="email" placeholder="Email" value="{{auth()->user()->email}}">
