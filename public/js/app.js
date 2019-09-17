@@ -37536,7 +37536,9 @@ var render = function() {
       "select",
       { staticClass: "form-control", attrs: { name: "location" } },
       [
-        _c("option", [_vm._v("Choose A Location")]),
+        _c("option", { domProps: { value: null } }, [
+          _vm._v("Choose A Location")
+        ]),
         _vm._v(" "),
         _vm._l(_vm.locations, function(location) {
           return _c("option", { domProps: { value: location.name } }, [

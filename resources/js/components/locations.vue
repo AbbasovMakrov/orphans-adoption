@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <select class="form-control" name="location">
-            <option>Choose A Location</option>
+            <option :value="null">Choose A Location</option>
             <option :value="location.name" v-for="location in locations">{{location.name}}</option>
         </select>
     </div>
