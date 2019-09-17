@@ -7,6 +7,7 @@ use App\Location;
 use App\Rules\CheckUserId;
 use Illuminate\Http\Request;
 use App\Orphan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -150,7 +151,7 @@ class OrphanController extends Controller
         return $this->redirection(false,true,self::STATUS,"done");
     }
 
-    public function myOrphans($profileId = 1)
+    public function myOrphans($profileId = null)
     {
         $validation = Validator::make([
             "profile_id" => $profileId
@@ -161,9 +162,9 @@ class OrphanController extends Controller
         {
             return $this->redirection(false,false,"","","/",true,$validation->errors());
         }
-        $orphan = $orphan = Orphan::where("user_id",$profileId)->paginate();
+        $orphan = Orphan::paginate();
         if (auth()->check()) {
-            $orphan = Orphan::whereUserId(auth()->user()->id)->paginate();
+            $orphan = Orphan::withTrashed()->whereUserId(auth()->user()->id)->paginate();
         }
         if (!empty($profileId))
         {
@@ -184,5 +185,20 @@ class OrphanController extends Controller
         return response()->json([
             "orphans" => $orphans->get()
         ]);
+    }
+
+    protected function restore($id)
+    {
+        if ($this->idValidate($id)->fails())
+        {
+            return redirect()->back();
+        }
+        $orphan = Orphan::withTrashed()->findOrFail($id);
+        if ($orphan->user_id != Auth::user()->id)
+        {
+            return redirect()->back();
+        }
+        $orphan->restore();
+        return redirect()->route("orphan.all")->with("success","Done");
     }
 }
