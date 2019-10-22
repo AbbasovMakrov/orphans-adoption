@@ -12,6 +12,7 @@
 */
 
 use App\AdditionalHelpers\ControllerHelpers;
+use App\Orphan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', ControllerHelpers::Action("Orphan"));
@@ -38,5 +39,4 @@ Route::prefix("adoptions")->group(function()
 });
 Route::view("profile","profile")->name("profile")->middleware("auth");
 Route::post('profile/submit', ControllerHelpers::Action("Auth\Account","submit"))->name("profile.update");
-Route::view("search-users","search-users")->name("user.search");
-Route::view("orphans-search","orphans.search")->name("orphan.search");
+Route::view("dashboard","dashboard",['orphans' => Orphan::whereUserId(auth()->id())])->middleware("auth");

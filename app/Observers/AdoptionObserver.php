@@ -8,17 +8,18 @@ use App\Orphan;
 
 class AdoptionObserver
 {
+    /**
+     * @param Adoption $adoption
+     * @throws \Exception
+     */
     public function created(Adoption $adoption)
     {
-        try {
-            Orphan::findOrFail($adoption->orphan_id)->delete();
-        } catch (\Exception $e) {
-            throw $e;
-        }
+        Orphan::findOrFail($adoption->orphan_id)->delete();
     }
 
     public function deleted(Adoption $adoption)
     {
+
         Orphan::withTrashed()->findOrFail($adoption->orphan_id)->restore();
     }
 }

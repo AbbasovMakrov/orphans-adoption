@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Adoption;
 use App\Http\Requests\StoreOrhpanRequest as StoreRequest;
 use App\Location;
 use App\Rules\CheckUserId;
@@ -28,7 +29,9 @@ class OrphanController extends Controller
      */
     public function index()
     {
-        return view("main",['orphans' => Orphan::with("user")->paginate()]) ;
+        $orphans = Orphan::with("user")->get();
+        $adopted = Adoption::with(['user',"orphan"])->inRandomOrder()->take(8)->get();
+        return view("main", ['orphans' => $orphans , 'adopted' => $adopted]);
     }
 
     /**
@@ -78,6 +81,8 @@ class OrphanController extends Controller
     {
         if ($this->idValidate($id)->fails()) return $this->redirection(true);
         $orphan = Orphan::where("id",$id)->with("user")->firstOrFail();
+        if (!\auth()->check())
+            return view("orphans.show-guest",compact('orphan'));
         return  view("orphans.show",compact('orphan'));
     }
 
@@ -162,31 +167,16 @@ class OrphanController extends Controller
         {
             return $this->redirection(false,false,"","","/",true,$validation->errors());
         }
-        $orphan = Orphan::paginate();
-        if (auth()->check()) {
-            $orphan = Orphan::withTrashed()->whereUserId(auth()->user()->id)->paginate();
-        }
+        $orphan = Orphan::get();
+        if (auth()->check())
+            $orphan = Orphan::whereUserId(auth()->user()->id)->get();
         if (!empty($profileId))
-        {
-            $orphan = Orphan::where("user_id",$profileId)->paginate();
-        }
+            $orphan = Orphan::where("user_id",$profileId)->get();
+
         return view("orphans.my-orphans",[
             "orphans" => $orphan
         ]);
     }
-
-    public function search($keyword)
-    {
-        $orphans = Orphan::where("name","like","%{$keyword}%")->with("user");
-        if ($orphans->count() <= 0)
-        {
-            $orphans = Orphan::with("user");
-        }
-        return response()->json([
-            "orphans" => $orphans->get()
-        ]);
-    }
-
     protected function restore($id)
     {
         if ($this->idValidate($id)->fails())

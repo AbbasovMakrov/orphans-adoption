@@ -1,6 +1,6 @@
 <?php
 
-// @formatter:off
+// @formatter:on
 /**
  * A helper file for your Eloquent Models
  * Copy the phpDocs from this file to the correct Model,

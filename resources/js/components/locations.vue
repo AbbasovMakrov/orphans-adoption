@@ -1,6 +1,7 @@
 <template>
     <div id="app">
-        <select class="form-control" name="location">
+        <div class="alert alert-danger" v-show="this.locations.length === 0" > No locations</div>
+        <select class="form-control" v-show="this.locations" name="location">
             <option :value="null">Choose A Location</option>
             <option :value="location.name" v-for="location in locations">{{location.name}}</option>
         </select>
@@ -10,9 +11,8 @@
 
 <script>
     export default {
-        name: "locations",
-        data ()
-        {
+        name: "locationsComponent",
+        data() {
             return {
                 locations:[]
             }
@@ -21,8 +21,11 @@
             getLocations(){
                 axios.get("/api/locations/get").then(response => {
                     this.locations = response.data.locations;
+                }).catch(error => {
+                   console.log(error.toString());
                 });
-            }
+            },
+
         },
         mounted() {
             this.getLocations();
@@ -30,6 +33,4 @@
     }
 </script>
 
-<style scoped>
 
-</style>

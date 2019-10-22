@@ -36,16 +36,4 @@ class AccountController extends Controller
         $user->update($data);
         return $this->redirection(false,true,"success","Account Updated !","/");
     }
-
-    protected function search($keyword)
-    {
-        $users = User::where("name","like","%$keyword%")->with(['orphan',"adoption"])->get();
-        if ($users->count() <= 0)
-        {
-            $users = User::with(['orphan',"adoption"])->get();
-        }
-        return response()->json([
-            "users" => $users
-        ]);
-    }
 }

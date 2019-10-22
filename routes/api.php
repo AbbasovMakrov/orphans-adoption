@@ -2,8 +2,7 @@
 
 use App\AdditionalHelpers\ControllerHelpers;
 use App\Location;
-use Illuminate\Http\Request;
-use \Illuminate\Support\Facades\Cache;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,22 +14,10 @@ use \Illuminate\Support\Facades\Cache;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 Route::get("locations/get",function()
 {
-    $cache = Cache::get("locations");
-    if (empty($cache))
-    {
-        if (!Cache::forever("locations",Location::get()))
-        {
-            $cache = Location::get();
-        }
-    }
    return response()->json([
-      "locations" => $cache
+      "locations" => Location::get()
    ]);
 });
-Route::get("search/user/{keyword}",ControllerHelpers::Action("Auth\Account","search"));
-Route::get("search/orphan/{keyword}",ControllerHelpers::Action("Orphan","search"));
+

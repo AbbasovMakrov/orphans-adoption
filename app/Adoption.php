@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+AdditionalHelpers\ControllerHelpers::Action("طيز_مختار","كسة_الاحمر");
 
 
 /**

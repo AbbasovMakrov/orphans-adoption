@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+@php
+    function is_active($element)
+    {
+        return \Illuminate\Support\Str::contains(url()->current(),$element) ? "active" : "";
+    }
+@endphp
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,10 +17,10 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <!-- Fonts -->
+    <!-- Fonts
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
+        -->
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
@@ -27,17 +33,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item active">
+            <li class="nav-item {{is_active("")}}">
                 <a class="nav-link" href="{{url("/")}}">Home <span class="sr-only">(current)</span></a>
-                <a class="nav-link" href="{{route("user.search")}}">Search Users</a>
-                <a class="nav-link" href="{{route("orphan.search")}}">Search Orphans</a>
             </li>
             <li class="nav-item">
                 @auth
                 <div class="dropdown show">
 
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Orphans&Adoption
+                        Orphans<span>&</span>Adoption
                     </button>
 
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

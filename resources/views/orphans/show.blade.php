@@ -25,6 +25,11 @@
                                     </a>
                                 </form>
                             @endif
+                                <form method="post" action="{{route("adoption.adopt",['orphanId' => $orphan->id])}}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">Adopt</button>
+                                </form>
+
                         @endauth
                     </div>
                 </div>
