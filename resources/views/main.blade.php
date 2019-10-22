@@ -49,15 +49,6 @@
                 <!-- search & aside toggle -->
                 <div class="nav-btns">
                     <button class="aside-btn"><i class="fa fa-bars"></i></button>
-                    <button class="search-btn"><i class="fa fa-search"></i></button>
-                    <div id="nav-search">
-                        <form>
-                            <input class="input" name="search" placeholder="Enter your search...">
-                        </form>
-                        <button class="nav-close search-close">
-                            <span></span>
-                        </button>
-                    </div>
                 </div>
                 <!-- /search & aside toggle -->
             </div>
@@ -77,8 +68,8 @@
         <!-- Aside Nav -->
         <div id="nav-aside" class="">
             <ul class="nav-aside-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
             </ul>
             <button class="nav-close nav-aside-close"><span></span></button>
         </div>

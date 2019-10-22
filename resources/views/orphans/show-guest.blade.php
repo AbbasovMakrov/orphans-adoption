@@ -10,13 +10,13 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CMuli:400,700" rel="stylesheet">
 
     <!-- Bootstrap -->
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css">
 
     <!-- Font Awesome Icon -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
 
     <!-- Custom stlylesheet -->
-    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link type="text/css" rel="stylesheet" href="/css/style.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,7 +41,7 @@
 
                 <!-- logo -->
                 <div class="nav-logo">
-                    <a href="index.html" class="logo"><img src="./img/logo.png" alt=""></a>
+                    <a href="/" class="logo">My Orphan</a>
                 </div>
                 <!-- /logo -->
 
@@ -93,7 +93,7 @@
                 <div class="col-md-10">
                     <h1>{{$orphan->name}}</h1>
                     <ul class="post-meta">
-                        <li><a href="{{route("orphan.my",['profileId' => $orphan->user_id])}}">{{$orhpan->user->name}}</a></li>
+                        <li><a href="{{route("orphan.my",['profileId' => $orphan->user_id])}}">{{$orphan->user->name}}</a></li>
                         <li>{{$orphan->created_at}}</li>
 
 
@@ -123,8 +123,8 @@
                 <div class="section-row">
                     <h3>Age : {{$orphan->age}}</h3>
                     <p>Location : {{$orphan->location}}</p>
-                    @if($orhpan->other_details)
-                    <p>{{$orhpan->other_details}}</p>
+                    @if($orphan->other_details)
+                    <p>{{$orphan->other_details}}</p>
                     @endif
                     @auth
                         @if(auth()->id() != $orphan->user_id)
@@ -153,38 +153,10 @@
     <!-- container -->
     <div class="container">
         <!-- row -->
-        <div class="row">
-            <div class="col-md-3">
-                <div class="footer-widget">
-                    <div class="footer-logo">
-                        <a href="index.html" class="logo"><img src="./img/logo-alt.png" alt=""></a>
-                    </div>
-
-
-                </div>
-            </div>
-
-
-
-        </div>
-        <!-- /row -->
-
-        <!-- row -->
         <div class="footer-bottom row">
-            <div class="col-md-6 col-md-push-6">
-                <ul class="footer-nav">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contacts</a></li>
-                    <li><a href="#">Advertise</a></li>
-                    <li><a href="#">Privacy</a></li>
-                </ul>
-            </div>
-            <div class="col-md-6 col-md-pull-6">
+            <div class="col-md-6">
                 <div class="footer-copyright">
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright ©<script>document.write(new Date().getFullYear());</script>2019 All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                   Project lincide Under Code for Iraq
                 </div>
             </div>
         </div>
@@ -195,10 +167,10 @@
 <!-- /FOOTER -->
 
 <!-- jQuery Plugins -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/main.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/main.js"></script>
 
 
 

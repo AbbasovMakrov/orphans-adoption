@@ -81,9 +81,9 @@ class OrphanController extends Controller
     {
         if ($this->idValidate($id)->fails()) return $this->redirection(true);
         $orphan = Orphan::where("id",$id)->with("user")->firstOrFail();
-        if (!\auth()->check())
-            return view("orphans.show-guest",compact('orphan'));
-        return  view("orphans.show",compact('orphan'));
+        if (!auth()->check())
+            return view("orphans.show-guest",['orphan' => $orphan]);
+        return  view("orphans.show",['orphan' => $orphan]);
     }
 
     /**
