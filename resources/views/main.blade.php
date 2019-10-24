@@ -68,8 +68,13 @@
         <!-- Aside Nav -->
         <div id="nav-aside" class="">
             <ul class="nav-aside-menu">
+                @guest
                 <li><a href="/login">Login</a></li>
                 <li><a href="/register">Register</a></li>
+                    @endguest
+                @auth
+                    <li><a href="{{route("dashboard")}}">Dashboard</a></li>
+                    @endauth
             </ul>
             <button class="nav-close nav-aside-close"><span></span></button>
         </div>

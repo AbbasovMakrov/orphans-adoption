@@ -51,6 +51,5 @@
                 </div>
             </div>
         @endforeach
-        {{$orphans->links()}}
     </div>
 @stop

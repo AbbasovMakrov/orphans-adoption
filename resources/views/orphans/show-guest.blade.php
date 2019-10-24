@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>Callie HTML Template</title>
+    <title>My Orphan</title>
 
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CMuli:400,700" rel="stylesheet">
@@ -48,15 +48,6 @@
                 <!-- search & aside toggle -->
                 <div class="nav-btns">
                     <button class="aside-btn"><i class="fa fa-bars"></i></button>
-                    <button class="search-btn"><i class="fa fa-search"></i></button>
-                    <div id="nav-search">
-                        <form>
-                            <input class="input" name="search" placeholder="Enter your search...">
-                        </form>
-                        <button class="nav-close search-close">
-                            <span></span>
-                        </button>
-                    </div>
                 </div>
                 <!-- /search & aside toggle -->
             </div>
@@ -76,9 +67,15 @@
         <!-- Aside Nav -->
         <div id="nav-aside">
             <ul class="nav-aside-menu">
-                <li><a href="/login">Login</a></li>
-                <li><a href="/register">Register</a></li>
+                @guest
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register">Register</a></li>
+                @endguest
+                @auth
+                    <li><a href="{{route("dashboard")}}">Dashboard</a></li>
+                @endauth
             </ul>
+
             <button class="nav-close nav-aside-close"><span></span></button>
         </div>
         <!-- /Aside Nav -->
